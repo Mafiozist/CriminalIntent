@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Кнопки сверху до тех пор, пока не пойму как сделать иначе-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp"
+        android:layout_gravity="top">
+
+        <Button
+            android:id="@+id/crime_first_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:text="@string/crime_button_begin_text"/>
+
+        <Button
+            android:id="@+id/crime_last_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:text="@string/crime_button_end_text"/>
+    </GridLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/crime_view_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp" >
+
+    </androidx.viewpager.widget.ViewPager>
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

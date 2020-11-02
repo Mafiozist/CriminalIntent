@@ -11,6 +11,8 @@ public class Crime {
     private Boolean mSolved;
     private Date mDate;
 
+    private boolean mRequiresPolice;
+
 
     public Crime(){
         mID = UUID.randomUUID();
@@ -18,6 +20,9 @@ public class Crime {
     }
 
 
+    public boolean ismRequiresPolice() { return mRequiresPolice; }
+
+    public void setmRequiresPolice(boolean mRequiresPolice) { this.mRequiresPolice = mRequiresPolice; }
 
     public UUID getmID() {
         return mID;
@@ -35,7 +40,7 @@ public class Crime {
         this.mTitle = mTitle;
     }
 
-    public Boolean getmSolved() {
+    public Boolean isSolved() {
         return mSolved;
     }
 
@@ -50,8 +55,6 @@ public class Crime {
     public void setmDate(Date mDate) {
         this.mDate = mDate;
     }
-
-
 
 
 }

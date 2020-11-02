@@ -10,12 +10,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-//Задача этого фрагмента - отображение информации содержащейся в классе Crime т.е. выдача конкретной информации о конкретном преступлении
+import java.util.List;
+import java.util.UUID;
+
+//Задача этого фрагмента - отображение информации содержащейся в классе Crime т.е.
+// выдача конкретной информации о конкретном преступлении
 public class CrimeFragment extends Fragment {
     private Crime mCrime;
     private EditText mTitleField;
@@ -23,11 +26,27 @@ public class CrimeFragment extends Fragment {
     private CheckBox mSolved;
 
 
+
+    private static final String ARG_CRIME_ID = "crime_id";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Crime();
+        //Получаем crimeId по ключуи ищем схожий объект в crimeLab
+        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
+
+    //Получает UUID, создает пакет аргументов, создает экземпляр фрагмента, а
+    // затем присоединяет аргументы к фрагменту.
+    public static CrimeFragment newIstance(UUID crimeId){
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CRIME_ID, crimeId);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Nullable
     @Override //Именно этот метод используется для заполнения отображения layout
@@ -35,6 +54,7 @@ public class CrimeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_crime, container, false);
         mTitleField = view.findViewById(R.id.crime_title);
+        mTitleField.setText(mCrime.getmTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -56,7 +76,10 @@ public class CrimeFragment extends Fragment {
         mDateButton.setText(mCrime.getmDate().toString());
         mDateButton.setEnabled(false);
 
+
+
         mSolved = view.findViewById(R.id.crime_solved);
+        mSolved.setChecked(mCrime.isSolved());
         mSolved.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -64,6 +87,10 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+
         return view;
     }
+
+
+
 }
