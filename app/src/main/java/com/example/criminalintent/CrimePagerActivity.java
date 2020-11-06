@@ -40,6 +40,9 @@ public class CrimePagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crime_pager);
         UUID crimeID = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
+        mCrimeLastButton = findViewById(R.id.crime_last_button) ;
+        mCrimeFirstButton = findViewById(R.id.crime_first_button) ;
+
         mCrimes = CrimeLab.get(this).getCrimes();
         mViewPager = findViewById(R.id.crime_view_pager);
         //Экземпляр фрагмент менеджера нужен, чтобы данный агент мог возрващать фрагменты
@@ -63,21 +66,20 @@ public class CrimePagerActivity extends AppCompatActivity {
         for (int crimeIndex = 0; crimeIndex < mCrimes.size(); ++crimeIndex){
             if (mCrimes.get(crimeIndex).getmID().equals(crimeID)) {
                 mViewPager.setCurrentItem(crimeIndex);
+
                 break;
             }
         }
 
         //mViewPager.setOffscreenPageLimit(2);
 
-        mCrimeLastButton = findViewById(R.id.crime_last_button) ;
-        ( mCrimeFirstButton = findViewById(R.id.crime_first_button) ).setEnabled(false);
 
+        //В будующем сделать блокировку кнопок
         mCrimeFirstButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 mViewPager.setCurrentItem(0);
-                mCrimeFirstButton.setEnabled(false);
-                mCrimeLastButton.setEnabled(true);
+
             }
         });
 
@@ -85,8 +87,7 @@ public class CrimePagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mViewPager.setCurrentItem(mCrimes.size() - 1);
-                mCrimeLastButton.setEnabled(false);
-                mCrimeFirstButton.setEnabled(true);
+
             }
         });
 
