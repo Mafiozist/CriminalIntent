@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +19,9 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
-
+//262
 public class DatePickerFragment extends DialogFragment {
     private static final String ARG_DATE = "date";
     public static final String EXTRA_DATE = "com.example.criminalintent.date";
@@ -31,7 +31,8 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View date_view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_date, null);
-        Date date = (Date) getArguments().getSerializable(ARG_DATE);
+        Date date = ((Date) getArguments().getSerializable(ARG_DATE) == null)? new Date() :
+                    (Date) getArguments().getSerializable(ARG_DATE);
 
         //Объект удобный для установки и использовния конкретного значения даты, без этого класса
         // объект date будет напоминать просто временную метку, без конкреных(целых) значений
@@ -63,16 +64,6 @@ public class DatePickerFragment extends DialogFragment {
                             }
                         }).create();
     }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_date, null);
-
-
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
 
 
     private void sendResult(int resultCode, Date date){

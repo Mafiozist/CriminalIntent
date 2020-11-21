@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,9 @@ class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListene
     public void bind(Crime crime){
         mCrime = crime;
         mTitleTextView.setText(mCrime.getmTitle());
-        mDateTextView.setText( DateFormat.format( "E, H:m, d/M/y"  ,mCrime.getmDate()).toString());
+        mDateTextView.setText( DateFormat.format( "E, H:mm, d/M/y"  , mCrime.getmDate()).toString());
         mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.INVISIBLE);
+        Log.i("ImageStatusOnBinding", crime.isSolved().toString());
     }
 
     //Событие отвечающее за запуск подробного описания класса Crime
@@ -55,7 +57,6 @@ class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListene
         Intent intent = CrimePagerActivity.newIntent(view.getContext(), mCrime.getmID());
         //Если событие клик произошло - вероятно данные были изменены, лучше сделать проверку, но пока не знаю
         // как во всяком случае, лучше обновить 1 объект чем все
-        setLastCrimeChanged(mCrime.getmID());
         view.getContext().startActivity(intent);
     }
 
@@ -65,7 +66,4 @@ class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListene
         return true;
     }
 
-    private static void setLastCrimeChanged(UUID id){
-            mLastCrimeChanged = id;
-    }
 }

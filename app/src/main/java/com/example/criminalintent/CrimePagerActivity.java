@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +27,7 @@ import java.util.UUID;
 
 //В данной реализации используется FragmentStatePagerAdapter т.к. он является более экономной версией по отношениею к FragmentPagerAdapter
 //FragmentStatePagerAdapter - вызывает метод remove и удаляет фрагмент, а FragmentPagerAdapter - detach тем самым сохраняя фрагмент в памяти
-//244
+//274
 public class CrimePagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
@@ -40,14 +42,14 @@ public class CrimePagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crime_pager);
         UUID crimeID = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
-        mCrimeLastButton = findViewById(R.id.crime_last_button) ;
-        mCrimeFirstButton = findViewById(R.id.crime_first_button) ;
+        mCrimeLastButton = findViewById(R.id.crime_last_button);
+        mCrimeFirstButton = findViewById(R.id.crime_first_button);
 
         mCrimes = CrimeLab.get(this).getCrimes();
         mViewPager = findViewById(R.id.crime_view_pager);
         //Экземпляр фрагмент менеджера нужен, чтобы данный агент мог возрващать фрагменты
         FragmentManager fm = getSupportFragmentManager();
-        mViewPager.setAdapter(new FragmentPagerAdapter( fm ) {
+        mViewPager.setAdapter(new FragmentPagerAdapter(fm) {
             @NonNull
             @Override
             public Fragment getItem(int position) {
@@ -63,10 +65,9 @@ public class CrimePagerActivity extends AppCompatActivity {
         });
 
         //Установки элемента выбранного пользователем
-        for (int crimeIndex = 0; crimeIndex < mCrimes.size(); ++crimeIndex){
+        for (int crimeIndex = 0; crimeIndex < mCrimes.size(); ++crimeIndex) {
             if (mCrimes.get(crimeIndex).getmID().equals(crimeID)) {
                 mViewPager.setCurrentItem(crimeIndex);
-
                 break;
             }
         }
@@ -75,7 +76,7 @@ public class CrimePagerActivity extends AppCompatActivity {
 
 
         //В будующем сделать блокировку кнопок
-        mCrimeFirstButton.setOnClickListener(new View.OnClickListener(){
+        mCrimeFirstButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mViewPager.setCurrentItem(0);
@@ -83,7 +84,7 @@ public class CrimePagerActivity extends AppCompatActivity {
             }
         });
 
-        mCrimeLastButton.setOnClickListener(new View.OnClickListener(){
+        mCrimeLastButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mViewPager.setCurrentItem(mCrimes.size() - 1);
@@ -95,12 +96,12 @@ public class CrimePagerActivity extends AppCompatActivity {
 
 
     //Метод необходимый для указаний, какой объект должен отображаться(работает по UUID)
-    public static Intent newIntent(Context packageContext, UUID crimeId){
+    //С сохранением данных
+    @NotNull
+    public static Intent newIntent(Context packageContext, UUID crimeId) {
         Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID,crimeId);
-
+        intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
     }
-
 
 }

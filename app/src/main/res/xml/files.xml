@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Xml Файл отвечающий за конфигурацию корневого пути закрытого хранилища-->
+<paths>
+    <files-path
+        name="crime_photos"
+        path="."/>
+</paths>
+

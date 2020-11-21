@@ -8,16 +8,21 @@ import java.util.UUID;
 public class Crime {
     private UUID mID;
     private String mTitle;
-    private Boolean mSolved;
+    private boolean mSolved;
     private Date mDate;
-
+    private String mSuspect;
     private boolean mRequiresPolice;
 
 
     public Crime(){
-        mID = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Crime(UUID id){
+        mID = id;
         mDate = new Date();
     }
+
 
 
     public boolean ismRequiresPolice() { return mRequiresPolice; }
@@ -56,5 +61,15 @@ public class Crime {
         this.mDate = mDate;
     }
 
+    public String getSuspect() {
+        return mSuspect;
+    }
 
+    public void setSuspect(String mSuspect) {
+        this.mSuspect = mSuspect;
+    }
+
+    public  String getPhotoFilename(){
+        return "IMG_" + getmID().toString() + ".jpg";
+    }
 }

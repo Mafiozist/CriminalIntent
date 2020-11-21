@@ -9,7 +9,35 @@
     <string name="date_picker_title">Дата преступления</string>
     <string name="time_picker_title">Время преступления</string>
     <string name="set_time_text">Установить точное время</string>
+    <string name="new_crime">Добавить новое преступление</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="remove_crime">Удалить преступление</string>
 
+    <plurals name="subtitile_plurals">
+        <item quantity="zero">%1$d преступлений</item>
+        <item quantity="one">%1$d преступление</item>
+        <item quantity="two">%1$d преступления</item>
+        <item quantity="many">%1$d преступлений</item>
+        <item quantity="other">%1$d преступления</item>
+    </plurals>
 
+    <string name="crime_suspect_text">Выбрать подозреваемого </string>
+    <string name="crime_report_text">Отправить отчет о преступлении</string>
+
+    <string name="crime_report">Дело под именем %1$s!
+            Дело было сделано в %2$s. %3$s, и %4$s
+    </string>
+
+    <string name="crime_report_solved">Дело сделано, ничего не вернуть. </string>
+    <string name="crime_report_unsolved">Где решенное дело, Лебовски?</string>
+    <string name="crime_report_no_suspect">Тут кажется нет подозреваемых </string>
+    <string name="crime_report_suspect">Кажется, что подозреваемый это %s.</string>
+    <string name="crime_report_subject">Рапорт от приложения CriminalIntent</string>
+    <string name="send_report">Отправить дело</string>
+
+    <string name="if_have_not_default_contacts">У вас на телефоне нет приложения для контактов</string>
+    <string name="call_suspect_text">Позвонить этому засранцу</string>
+    <string name="suspect_is">Подозреваемый это %1$s </string>
 
 </resources>
